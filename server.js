@@ -35,6 +35,32 @@ app.get('/', (req, res) => {
 
 });
 
+app.get('/:database', (req, res) => {
+    try {
+        console.log("get incoming");
+        let database = req.params["database"];
+        conn.query("USE " + database + ";", (err, result) => {
+            if (err){
+                console.log(e);
+                return result.status(500).json({ error: err }); 
+            }
+        });
+        let sql = "SHOW TABLES";
+        conn.query(sql, (err, result) => {
+            if (err){
+                console.log(e);
+                return res.status(500).json({ error: err }); 
+            }
+            return res.status(200).json(result);
+        });
+    }
+    catch (e) {
+        console.error(e);
+        return res.status(500).json({ error: 'There might be a problem' });
+    }
+
+});
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
