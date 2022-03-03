@@ -1,0 +1,19 @@
+.App {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-inline: auto;
+  align-items: center;
+  width: 80%;
+
+  .Logo {
+    margin-inline: auto;
+    width: 10em;
+    height: 10em;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+}

@@ -1,7 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const mysql = require('mysql');
+const path = __dirname + "/public";
 var corsOptions = {
     origin: "http://localhost:8001"
 }
@@ -39,6 +41,10 @@ conn.connect(function (err) {
 })
 
 app.get('/', (req, res) => {
+    res.sendFile(path + "/index.html");
+});
+
+app.get('/databases', (req, res) => {
     console.log("get incoming");
     try {
         console.log("get incoming /");
