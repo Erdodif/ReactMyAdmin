@@ -1,9 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const mysql = require('mysql');
-const path = __dirname + "/public";
+require('dotenv').config({path:"../.env"});
 var corsOptions = {
     origin: "http://localhost:8001"
 }
@@ -12,9 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 var conn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: ""
+    host: process.env.SERVER_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD
 });
 
 function getResultByName(list, name) {
@@ -41,13 +40,7 @@ conn.connect(function (err) {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path + "/index.html");
-});
-
-app.get('/databases', (req, res) => {
-    console.log("get incoming");
     try {
-        console.log("get incoming /");
         conn.query("SHOW DATABASES", (err, result) => {
             if (err) return res.status(500).json({ error: err });
             let out = getResultByName(result, "Database");
@@ -133,7 +126,7 @@ app.get('/:database/:table', (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.SERVER_PORT || 8080;
 
 app.listen(PORT, () => {
     console.log(`Running on port ${PORT}.`)
