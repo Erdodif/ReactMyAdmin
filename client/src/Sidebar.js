@@ -12,7 +12,7 @@ export default class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        this.setItems();
+        this.fillSidebar();
     }
 
     componentDidUpdate(prevProps, prevState) {
