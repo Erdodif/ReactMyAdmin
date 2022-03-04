@@ -16,6 +16,9 @@
         "api",
         "xampp"
     ],
+    "scripts":{
+        "postinstall": "cd client && npm install && cd ../server && npm install"
+    },
     "author": "Philip G. Woods",
     "license": "ISC",
     "bugs": {
