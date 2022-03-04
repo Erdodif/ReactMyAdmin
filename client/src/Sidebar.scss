@@ -1,0 +1,29 @@
+@use "index";
+.Sidebar{
+    background-color: var(--primary);
+    color: var(--on-primary);
+    width: 21ch;
+    padding-inline:2ch;
+    height: 100vh;
+    .Logo{
+        margin-block-start: 2ch;
+        margin-block-end: -.5ch;
+        height: auto;
+        width: 20ch;
+    }
+    .Database{
+        user-select: none;
+        -moz-user-select: none;
+        img{
+            user-select: none;
+            width: 1ch;
+            margin-inline-end: 1ch;
+            transform: rotate(90deg);
+        }
+        &.selected{
+            img{
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

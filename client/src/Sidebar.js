@@ -1,3 +1,4 @@
+import './Sidebar.scss';
 import React from "react";
 
 export default class Sidebar extends React.Component {
@@ -47,12 +48,13 @@ export default class Sidebar extends React.Component {
 
     render(){
         return (
-            <div className="Sidebar">
-                <div className="Searchbar">
+            <div className="Sidebar" key={"Sidebar"}>   
+                <img className="Logo" src="reactmyadmin_logo_text.svg" alt="ReactMyAdmin" />
+                <div className="Searchbar" key={"Searchbar"}>
                     <input type="text" />
                 </div>
-                <div className="Databases">
-                    {this.state.databases.map((database)=><Database name={database.name} />)}
+                <div className="Databases" key={"Databases"}>
+                    {this.state.databases.map((database)=><Database name={database.label} />)}
                 </div>
             </div>
         );
@@ -68,11 +70,9 @@ class Database extends React.Component {
     render(){
         const {name, selected} = this.props;
         return(
-            <div className={selected?"holder":"holder table-selected"}>
+            <div className={selected===true?"Database selected":"Database"} key={name}>
                 <div>
-                    {/* dropdown icon*/"i"}
-                </div>
-                <div>
+                    <img src="arrow_up.ico" alt="" />
                     {name}
                 </div>
                 <div className="Tables">
@@ -92,7 +92,7 @@ class Table extends React.Component {
     render(){
         const {name, selected} = this.props;
         return(
-            <div className={selected?"":"table-selected"}>
+            <div className={selected?"Table":"Table selected"} key={name}>
                 {name}
             </div>
         );
