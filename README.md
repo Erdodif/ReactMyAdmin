@@ -33,6 +33,8 @@ For both the database connection, and the port management, creating an enviromen
 | DATABASE_USER     | The user which will connect to the database. Note that this user must have full priviledge for various operation. |       root       |
 | DATABASE_PASSWORD | The password for the above mentioned user. (On an unmodified system it might be blank but still has to be set)    |                 |
 
+> Note that React app can only use enviromental variables with the "REACT_APP_" prefix and both the server port and the server host is required. The React app is available on localhost with the specified port to where the server is accepting cross-site call.
+
 ### .env.example
 
 > The purpose of this file it to give a syntax and semantic example of how and where the enviromental variables have to be set.
@@ -40,17 +42,18 @@ For both the database connection, and the port management, creating an enviromen
 #### Content of an example enviroment file
 
 ```.env
-# react app port
-PORT="8080" 
-
-# nodejs server port
-SERVER_PORT="8001"
-
+# nodejs server port and host
+SERVER_PORT=5000
 SERVER_HOST="localhost"
 
 # database credentials
 DATABASE_USER="Admin"
-DATABASE_PASSWORD="admin"
+DATABASE_PASSWORD="admin
+
+# react variables
+PORT=4000
+REACT_APP_SERVER_PORT=5000
+REACT_APP_SERVER_HOST="localhost"
 ```
 
 ### Setup the server and the client
