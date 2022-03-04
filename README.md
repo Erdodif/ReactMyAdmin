@@ -72,6 +72,14 @@ npm install
 
 #### Start the react app
 
+Command needed before first start
+
+```.cmd
+npm run copy-env
+```
+
+> This command will copy the .env file into the client folder. This should be done after every change of the .env file and the copied file should not be changed.
+
 ```.cmd
 npm run start
 ```
