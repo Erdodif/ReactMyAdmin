@@ -1,7 +1,6 @@
 import './App.scss';
 import Sidebar from './Sidebar';
-require('dotenv').config({path:"../.env"});
-const serverUrl = process.env.SERVER_HOST+":"+process.env.SERVER_PORT;
+const serverUrl = "http://"+process.env.REACT_APP_SERVER_HOST+":"+process.env.REACT_APP_SERVER_PORT;
 
 function App() {
   return (
