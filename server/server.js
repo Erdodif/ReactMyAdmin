@@ -4,7 +4,7 @@ const app = express();
 const mysql = require('mysql');
 require('dotenv').config({path:"../.env"});
 var corsOptions = {
-    origin: "http://localhost:8001"
+    origin: `http://localhost:${process.env.PORT}`
 }
 app.use(cors(corsOptions));
 app.use(express.json());
