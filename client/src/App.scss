@@ -2,14 +2,14 @@
 @use "themes";
 .App {
   @include themes.theme0;
-  &.theme1{
+  &.theme1 {
     @include themes.theme1;
   }
-  &.theme2{
+  &.theme2 {
     @include themes.theme2;
   }
   margin-block: 0;
-  margin-inline:0;
+  margin-inline: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

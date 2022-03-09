@@ -1,29 +1,46 @@
 @use "index";
-.Sidebar{
+.Sidebar {
     background-color: var(--primary);
     color: var(--on-primary);
     width: 21ch;
-    padding-inline:2ch;
+    padding-inline: 2ch;
     height: 100vh;
-    .Logo{
+    overflow-y:scroll;
+    &::-webkit-scrollbar{
+        width: 0;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    .Searchbar {
+        margin-block-end: 1em;
+        margin-block-start: 0.5em;
+    }
+    .Logo {
         margin-block-start: 2ch;
-        margin-block-end: -.5ch;
+        margin-block-end: -0.5ch;
         height: auto;
         width: 20ch;
     }
-    .Database{
+    .Database {
         user-select: none;
         -moz-user-select: none;
-        img{
+        img {
             user-select: none;
             width: 1ch;
             margin-inline-end: 1ch;
             transform: rotate(90deg);
+            transition: transform 80ms ease-out;
         }
-        &.selected{
-            img{
+        &.selected {
+            text-decoration: dotted;
+            img {
                 transform: rotate(180deg);
+                transition: transform 160ms ease-out;
             }
+        }
+        .Tables{
+            font-size: .9em;
+            padding-inline-start: 1.7em;
         }
     }
 }
