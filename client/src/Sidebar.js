@@ -1,5 +1,15 @@
 import './Sidebar.scss';
 import React from "react";
+const CORS_HEADERS_GET = {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    headers: {
+        'Accept': 'application/json'
+    }
+};
 
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -7,8 +17,7 @@ export default class Sidebar extends React.Component {
         this.state = {
             databases: [],
             search: "",
-            selected: null,
-            tables: []
+            selected: null
         };
     }
 
@@ -23,16 +32,7 @@ export default class Sidebar extends React.Component {
     }
 
     fillSidebar() {
-        fetch(this.props.url, {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            redirect: 'follow',
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
+        fetch(this.props.url, CORS_HEADERS_GET).then(response => {
             return response.json();
         }).then(data => {
             let databaseArray = [];
@@ -41,20 +41,20 @@ export default class Sidebar extends React.Component {
             }
             this.setState({ databases: databaseArray });
         }).catch(error => {
-                console.error(error);
-                alert(error);
-            });
+            console.error(error);
+            alert(error);
+        });
     }
 
-    render(){
+    render() {
         return (
-            <div className="Sidebar" key={"Sidebar"}>   
+            <div className="Sidebar">
                 <img className="Logo" src="reactmyadmin_logo_text.svg" alt="ReactMyAdmin" />
                 <div className="Searchbar" key={"Searchbar"}>
                     <input type="text" />
                 </div>
                 <div className="Databases" key={"Databases"}>
-                    {this.state.databases.map((database)=><Database name={database.label} />)}
+                    {this.state.databases.map((database) => <Database url={this.props.url} name={database.label} key={database.label} />)}
                 </div>
             </div>
         );
@@ -62,37 +62,92 @@ export default class Sidebar extends React.Component {
 }
 
 class Database extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = { selected: false, tables:[]};
+        this.state = { selected: false, tables: [] };
     }
 
-    render(){
-        const {name, selected} = this.props;
-        return(
-            <div className={selected===true?"Database selected":"Database"} key={name}>
-                <div>
+    switchSelected() {
+        this.setState({ selected: (!this.state.selected) });
+    }
+
+    render() {
+        const { name } = this.props;
+        const selected = this.state.selected;
+        const url = this.props.url + "/" + name;
+        return (
+            <div className={selected === true ? "Database selected" : "Database"} key={"Database " + name}>
+                <div onClick={() => this.switchSelected()}>
                     <img src="arrow_up.ico" alt="" />
                     {name}
                 </div>
-                <div className="Tables">
-                    {this.state.tables.map((table)=><Table name={table.name} />)}
-                </div>
+                <Tables url={url} key={"Tables of " + name} selected={this.state.selected} />
+            </div>
+        );
+    }
+}
+
+class Tables extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { tables: null };
+    }
+
+    componentDidMount() {
+        this.setTables();
+    }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.tables === null) {
+            this.setTables();
+        }
+    }
+
+    setTables() {
+        if (this.props.selected) {
+            fetch(this.props.url, CORS_HEADERS_GET
+            ).then(response => {
+                return response.json();
+            }).then(data => {
+                console.log(data);
+                let tableArray = [];
+                for (const table of data.tables) {
+                    tableArray.push({ name: table });
+                }
+                this.setState({ tables: tableArray });
+            }).catch(error => {
+                console.error(error);
+                alert(error);
+            });
+       }
+    }
+
+    render() {
+        let tables = null;
+        if (this.state.tables !== null && this.props.selected) {
+            tables = this.state.tables.map(
+                (table) => <Table name={table.name} key={"Table " + table.name} />
+            );
+        }
+        return (
+            <div className="Tables">
+                {tables}
             </div>
         );
     }
 }
 
 class Table extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = { selected: false };
     }
 
-    render(){
-        const {name, selected} = this.props;
-        return(
-            <div className={selected?"Table":"Table selected"} key={name}>
+    render() {
+        const { name, selected } = this.props;
+        return (
+            <div className={selected ? "Table" : "Table selected"}>
                 {name}
             </div>
         );
