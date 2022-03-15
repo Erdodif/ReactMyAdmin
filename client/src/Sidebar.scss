@@ -1,19 +1,28 @@
-@use "index";
 .Sidebar {
     background-color: var(--primary);
     color: var(--on-primary);
-    width: 21ch;
     padding-inline: 2ch;
     height: 100vh;
     overflow-y:scroll;
+    grid-area: sidebar;
     &::-webkit-scrollbar{
         width: 0;
     }
     -ms-overflow-style: none;
     scrollbar-width: none;
     .Searchbar {
+        height: 1em;
         margin-block-end: 1em;
         margin-block-start: 0.5em;
+        input{
+            color: var(--on-primary);
+            background: var(--primary-variant);
+            border: .125em solid var(--on-primary);
+            &:focus{
+                outline: none;
+                border: .15em solid var(--on-primary);
+            }
+        }
     }
     .Logo {
         margin-block-start: 2ch;
