@@ -13,10 +13,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin-inline: auto;
   align-items: center;
   display: grid;
-  grid-template-columns: 30ch;
+  width: 100%;
+  grid-template-columns: 24.5ch 1fr;
+  grid-template-rows: 3em 1fr;
+  grid-template-areas: 
+    'sidebar nav'
+    'sidebar page';
   .Logo {
     margin-inline: auto;
     width: 10em;

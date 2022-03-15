@@ -6,7 +6,7 @@
 $themes: (
   0: (
     "primary": rgb(90, 203, 255),
-    "primar-variant": rgb(77, 171, 214),
+    "primary-variant": rgb(77, 171, 214),
     "secondary": rgb(87, 173, 127),
     "secondary-variant": rgb(0, 56, 33),
     "on-primary": rgb(0, 0, 0),
@@ -14,7 +14,7 @@ $themes: (
   ),
   1 : (
     "primary": rgb(0, 84, 122),
-    "primar-variant": rgb(0, 135, 197),
+    "primary-variant": rgb(0, 135, 197),
     "secondary": rgb(13, 56, 77),
     "secondary-variant": rgb(0, 37, 56),
     "on-primary": rgb(255, 255, 255),
@@ -22,7 +22,7 @@ $themes: (
   ),
   2 : (
     "primary": rgb(0, 30, 44),
-    "primar-variant": rgb(1, 65, 95),
+    "primary-variant": rgb(1, 65, 95),
     "secondary": rgb(66, 1, 110),
     "secondary-variant": rgb(108, 0, 180),
     "on-primary": rgb(255, 255, 255),
@@ -30,7 +30,7 @@ $themes: (
   ),
   3 : (
     "primary": rgb(90, 203, 255),
-    "primar-variant": rgb(77, 171, 214),
+    "primary-variant": rgb(77, 171, 214),
     "secondary": rgb(87, 173, 127),
     "secondary-variant": rgb(0, 56, 33),
     "on-primary": rgb(0, 0, 0),
@@ -40,7 +40,7 @@ $themes: (
 
 @mixin theme0 {
   --primary: rgb(90, 203, 255);
-  --primar-variant: rgb(77, 171, 214);
+  --primary-variant: rgb(77, 171, 214);
   --secondary: rgb(87, 173, 127);
   --secondary-variant: rgb(0, 56, 33);
   --on-primary: rgb(0, 0, 0);
@@ -48,7 +48,7 @@ $themes: (
 }
 @mixin theme1 {
   --primary: rgb(0, 84, 122);
-  --primar-variant: rgb(0, 135, 197);
+  --primary-variant: rgb(0, 135, 197);
   --secondary: rgb(13, 56, 77);
   --secondary-variant: rgb(0, 37, 56);
   --on-primary: rgb(255, 255, 255);
@@ -56,7 +56,7 @@ $themes: (
 }
 @mixin theme2 {
   --primary: rgb(0, 30, 44);
-  --primar-variant: rgb(1, 65, 95);
+  --primary-variant: rgb(1, 65, 95);
   --secondary: rgb(66, 1, 110);
   --secondary-variant: rgb(108, 0, 180);
   --on-primary: rgb(255, 255, 255);
