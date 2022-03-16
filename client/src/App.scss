@@ -15,7 +15,8 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   align-items: center;
   display: grid;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   grid-template-columns: 24.5ch 1fr;
   grid-template-rows: 3em 1fr;
   grid-template-areas: 
