@@ -1,34 +1,111 @@
-.QueryPage{
+.PageHolder {
+    height: 100%;
+    overflow-y: auto;
+    background: var(--secondary);
+}
+.QueryPage {
     grid-column: 2;
     display: flex;
     flex-direction: column;
-    margin-block-end:auto;
     grid-area: page;
-    display: grid;
-    height: 100%;
-    grid-template-rows: 1fr 2fr;
-    grid-template-areas: 
-        'query'
-        'result';
-    .QueryEditor{
+    display: flex;
+    .QueryEditor {
+        display: block;
         padding: 1ch;
         box-sizing: border-box;
         width: 100%;
-        height: 100%;
-        resize:none !important;
-        background:var(--secondary);
+        min-height: 3em;
+        max-height: 30em;
+        height: auto;
+        background: var(--on-primary);
         color: var(--on-secondary);
         grid-area: query;
         overflow-y: auto;
-        &:focus{
+        z-index: 2;
+        caret-color: var(--secondary);
+        border: 0.4ch double var(--on-secondary);
+        &:focus {
+            border: 0.4ch solid var(--on-secondary);
             outline: none;
         }
+        &::before {
+            opacity: 0;
+            z-index: -1;
+            position: absolute;
+            content: var(--editor-hint);
+            color: var(--on-secondary);
+            transition: opacity 80ms ease-in;
+        }
+        &:empty::before {
+            z-index: 1;
+            opacity: 0.9;
+            transition: opacity 300ms ease-in-out;
+        }
     }
-    .QueryResult{
-        padding: 1ch;
+
+    .RunQuery {
+        font-weight: bold;
+        margin-inline: auto;
+        padding-block: 0.3em;
+        padding-inline: 1.5ch;
+        margin-block-start:.275em;
+        margin-block-end:.5em;
+        border-radius: .7em;
         background: var(--secondary-variant);
         color: var(--on-secondary);
+        border: .1ch solid var(--on-primary);
+        transition: background 180ms ease-in;
+        transition: color 80ms ease-in;
+        &:hover{
+            background: var(--secondary);
+            color: var(--secondary-variant);
+        }
+    }
+
+    .QueryResult{
+        margin-inline:auto;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .QueryResultTable {
+        border: 1ch solid var(--secondary-variant);
+        background: var(--secondary-variant);
+        color: var(--on-secondary);
+        padding-inline: .5em;
         grid-area: result;
+        white-space: nowrap;
+        display: block;
         overflow-y: auto;
+        border-collapse: collapse;
+        border-style: hidden;
+        tbody, thead, tfoot{
+            margin-inline: auto;
+        }
+        tr {
+            position: relative;
+            background: var(--secondary-variant);
+        }
+        td {
+            text-align: center;
+            padding-inline: 1ch;
+            border: 0.1ch solid var(--on-secondary);
+            background: var(--secondary-variant);
+            max-width: 15ch;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            &:hover {
+                top: -0.1ch;
+                margin-inline-start: -0.1ch;
+                position: absolute;
+                border: 0.1ch solid var(--on-secondary);
+                background: var(--secondary);
+                max-width: unset;
+                overflow-x: none;
+                text-overflow: unset;
+                white-space: inherit;
+            }
+        }
     }
 }
