@@ -1,5 +1,6 @@
 import './QueryPage.scss';
 import React from "react";
+import Highlighter from "./highlighting";
 const CORS_HEADERS_GET = {
     method: 'GET',
     mode: 'cors',
@@ -116,13 +117,21 @@ export default class QueryPage extends React.Component {
 
     }
 
+    runHighlight = () => {
+        document.getElementById("QueryHighlighted").innerHTML = Highlighter.getHighlighted(document.getElementById("QueryEditor").innerText);
+    }
+
     render() {
         let r = document.querySelector(':root');
         r.style.setProperty('--editor-hint', '"SELECT * FROM ' + this.props.table + ';"');
         return (
             <div className='PageHolder'>
                 <div className='QueryPage'>
-                    <div className='QueryEditor' id="QueryEditor" contentEditable>
+                    <div className='QueryEditor' id="QueryEditor" contentEditable spellCheck="false" onInput={this.runHighlight}>
+                        
+                    </div>
+                    <div className='QueryHighlighted' id='QueryHighlighted'>
+                    
                     </div>
                     <div className='RunQuery' onClick={this.runQuery}>
                         Run Query
