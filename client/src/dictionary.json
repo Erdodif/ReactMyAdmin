@@ -1,0 +1,44 @@
+[
+    {
+        "name":"select",
+        "main":"statement",
+        "side":"capital",
+        "description":null
+    },
+    {
+        "name":"dateiff",
+        "main":"function",
+        "side":"datetime italic",
+        "description":"Calculate the number of days between two dates.",
+        "args":[
+            {
+                "name":"date1",
+                "type":"date",
+                "description":null
+            },
+            {
+                "name":"date2",
+                "type":"date",
+                "description":null
+            }
+        ]
+    },
+    {
+        "name":"ifnull",
+        "main":"function",
+        "side":"flow-control italic",
+        "description":"Return the first argument if it is NOT NULL (or the second if it is).",
+        "args":[
+            {
+                "name":"data",
+                "type":"any",
+                "description":"The param which might be null."
+            },
+            {
+                "name":"onnull",
+                "type":"any",
+                "description":"The value if the given data is null."
+            }
+        ]
+    }
+]
