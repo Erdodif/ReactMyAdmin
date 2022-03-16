@@ -9,7 +9,38 @@
     flex-direction: column;
     grid-area: page;
     display: flex;
-    .QueryEditor {
+    .QueryEditor{
+        z-index: 2;
+        background: transparent;
+        color:transparent;
+        caret-color: var(--secondary);
+        border: 0.4ch double var(--on-secondary);
+        &:focus {
+            border: 0.4ch solid var(--on-secondary);
+            outline: none;
+        }
+    }
+    .QueryHighlighted{
+        background: var(--on-primary);
+        color: var(--on-secondary);
+        z-index: 1;
+        width: auto;
+        border: 0.4ch solid transparent;
+        &::after {
+            opacity: 0;
+            z-index: -1;
+            position: relative;
+            content: var(--editor-hint);
+            color: var(--on-secondary);
+        }
+        &:empty::after {
+            z-index: 1;
+            opacity: 0.9;
+            transition: opacity 300ms ease-in-out;
+        }
+    }
+    .QueryEditor, .QueryHighlighted{
+        font-size: 1rem;
         display: block;
         padding: 1ch;
         box-sizing: border-box;
@@ -17,30 +48,11 @@
         min-height: 3em;
         max-height: 30em;
         height: auto;
-        background: var(--on-primary);
-        color: var(--on-secondary);
         grid-area: query;
+        white-space: normal;
+        word-wrap: break-word;
         overflow-y: auto;
-        z-index: 2;
-        caret-color: var(--secondary);
-        border: 0.4ch double var(--on-secondary);
-        &:focus {
-            border: 0.4ch solid var(--on-secondary);
-            outline: none;
-        }
-        &::before {
-            opacity: 0;
-            z-index: -1;
-            position: absolute;
-            content: var(--editor-hint);
-            color: var(--on-secondary);
-            transition: opacity 80ms ease-in;
-        }
-        &:empty::before {
-            z-index: 1;
-            opacity: 0.9;
-            transition: opacity 300ms ease-in-out;
-        }
+        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
     }
 
     .RunQuery {
@@ -65,7 +77,9 @@
     .QueryResult{
         margin-inline:auto;
         max-width: 100%;
+        max-height: 100%;
         overflow-x: auto;
+        overflow-y: auto;
     }
 
     .QueryResultTable {
