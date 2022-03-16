@@ -19,19 +19,19 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={"App theme" + this.state.theme} key={"App"}>
-        <Sidebar url={serverUrl} syncTable={this.selectTable} />
+      <div className={"App theme" + this.state.theme} key={"App"} id="App">
+        <Sidebar url={serverUrl} syncTable={this.selectTable}/>
         <Navigation />
         <QueryPage url={serverUrl} database={this.state.database} table={this.state.table} />
       </div>
     );
   }
 
-  selectDatabase(database) {
+  selectDatabase = (database) => {
     this.setState({ database: database });
   }
 
-  selectTable(database, table) {
+  selectTable = (database, table) => {
     this.setState({
       database: database,
       table: table
