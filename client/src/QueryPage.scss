@@ -9,9 +9,19 @@
     flex-direction: column;
     grid-area: page;
     display: flex;
+
     .QueryEditor{
+        grid-area: query;
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
+    }
+    
+    #QueryEditor {
         z-index: 2;
         background: transparent;
+        grid-row: 1;
+        grid-column: 1;
         color:transparent;
         caret-color: var(--secondary);
         border: 0.4ch double var(--on-secondary);
@@ -20,26 +30,33 @@
             outline: none;
         }
     }
-    .QueryHighlighted{
+    .QueryHighlighted {
+        grid-row: 1;
+        grid-column: 1;
+        width: inherit;
+        position: relative;
         background: var(--on-primary);
         color: var(--on-secondary);
         z-index: 1;
-        width: auto;
         border: 0.4ch solid transparent;
-        &::after {
-            opacity: 0;
-            z-index: -1;
-            position: relative;
-            content: var(--editor-hint);
-            color: var(--on-secondary);
-        }
-        &:empty::after {
+        &:empty ~ .Hint {
+            margin-block-start:.675em;
+            margin-inline-start:.775em;
+            position: absolute;
             z-index: 1;
             opacity: 0.9;
             transition: opacity 300ms ease-in-out;
         }
     }
-    .QueryEditor, .QueryHighlighted{
+    .Hint {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+        content: var(--editor-hint);
+        color: var(--on-secondary);
+    }
+    #QueryEditor,
+    .QueryHighlighted {
         font-size: 1rem;
         display: block;
         padding: 1ch;
@@ -48,7 +65,6 @@
         min-height: 3em;
         max-height: 30em;
         height: auto;
-        grid-area: query;
         white-space: normal;
         word-wrap: break-word;
         overflow-y: auto;
@@ -60,22 +76,22 @@
         margin-inline: auto;
         padding-block: 0.3em;
         padding-inline: 1.5ch;
-        margin-block-start:.275em;
-        margin-block-end:.5em;
-        border-radius: .7em;
+        margin-block-start: 0.275em;
+        margin-block-end: 0.5em;
+        border-radius: 0.7em;
         background: var(--secondary-variant);
         color: var(--on-secondary);
-        border: .1ch solid var(--on-primary);
+        border: 0.1ch solid var(--on-primary);
         transition: background 180ms ease-in;
         transition: color 80ms ease-in;
-        &:hover{
+        &:hover {
             background: var(--secondary);
             color: var(--secondary-variant);
         }
     }
 
-    .QueryResult{
-        margin-inline:auto;
+    .QueryResult {
+        margin-inline: auto;
         max-width: 100%;
         max-height: 100%;
         overflow-x: auto;
@@ -86,14 +102,16 @@
         border: 1ch solid var(--secondary-variant);
         background: var(--secondary-variant);
         color: var(--on-secondary);
-        padding-inline: .5em;
+        padding-inline: 0.5em;
         grid-area: result;
         white-space: nowrap;
         display: block;
         overflow-y: auto;
         border-collapse: collapse;
         border-style: hidden;
-        tbody, thead, tfoot{
+        tbody,
+        thead,
+        tfoot {
             margin-inline: auto;
         }
         tr {
