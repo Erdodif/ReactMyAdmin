@@ -67,6 +67,7 @@ export default class QueryPage extends React.Component {
     }
 
     fillSuggestion() {
+        //TODO
     }
 
     runQuery = () => {
@@ -117,22 +118,13 @@ export default class QueryPage extends React.Component {
 
     }
 
-    runHighlight = () => {
-        document.getElementById("QueryHighlighted").innerHTML = Highlighter.getHighlighted(document.getElementById("QueryEditor").innerText);
-    }
-
     render() {
         let r = document.querySelector(':root');
         r.style.setProperty('--editor-hint', '"SELECT * FROM ' + this.props.table + ';"');
         return (
             <div className='PageHolder'>
                 <div className='QueryPage'>
-                    <div className='QueryEditor' id="QueryEditor" contentEditable spellCheck="false" onInput={this.runHighlight}>
-                        
-                    </div>
-                    <div className='QueryHighlighted' id='QueryHighlighted'>
-                    
-                    </div>
+                    <QueryEditor table={this.props.table} />
                     <div className='RunQuery' onClick={this.runQuery}>
                         Run Query
                     </div>
@@ -189,7 +181,22 @@ class ResultRow extends React.Component {
             <tr>
                 {row}
             </tr>
+        );
+    }
+}
 
+class QueryEditor extends React.Component {
+    runHighlight = () => {
+        document.getElementById("QueryHighlighted").innerHTML = Highlighter.getHighlighted(document.getElementById("QueryEditor").innerText);
+    }
+
+    render() {
+        return (
+            <div className='QueryEditor' spellCheck="false" onInput={this.runHighlight}>
+                <div id="QueryEditor" contentEditable></div>
+                <div className='QueryHighlighted' id='QueryHighlighted'></div>
+                <div className='Hint'>{'SELECT * FROM ' + this.props.table + ';'}</div>
+            </div>
         );
     }
 }
