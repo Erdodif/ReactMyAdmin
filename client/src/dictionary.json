@@ -1,43 +1,2254 @@
 [
     {
-        "name":"select",
-        "main":"statement",
+        "name":"current_timestamp",
+        "main":"constant",
         "side":"capital",
-        "description":null
+        "description":"Returns the current date and time, in a 'YYYY-MM-DD hh:mm:ss.mmm' format."
     },
     {
-        "name":"dateiff",
-        "main":"function",
-        "side":"datetime italic",
-        "description":"Calculate the number of days between two dates.",
+        "name":"current_user",
+        "main":"constant",
+        "side":"capital",
+        "description":"Returns the name of the current user in the SQL Server database."
+    },
+    {
+        "name":"session_user",
+        "main":"constant",
+        "side":"capital",
+        "description":"Returns the name of the current user in the SQL Server database."
+    },
+    {
+        "name":"system_user",
+        "main":"constant",
+        "side":"capital",
+        "description":"Returns the login name for the current user."
+    },
+    {
+        "name": "tinyint",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A small integer. The signed range of -128 to 127, and the unsigned range of 0 to 255."
+    },
+    {
+        "name": "int",
+        "main": "variable-type",
+        "side": "capital",
+        "alternative":[
+            "integer"
+        ],
+        "description": "Integer values from -2147483648 to 2147483647."
+    },
+    {
+        "name": "smallint",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A small integer. The signed range is -32768 to 32767. The unsigned range is 0 to 65535."
+    },
+    {
+        "name": "boolean",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A value 0 with “false,” and a value 1 with “true.”"
+    },
+    {
+        "name": "mediumint",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A medium-sized integer. The signed range is -8388608 to 8388607. The unsigned range is 0 to 16777215."
+    },
+    {
+        "name": "bigint",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A large integer. The signed range is -9223372036854775808 to 9223372036854775807. The unsigned range is 0 to 18446744073709551615."
+    },
+    {
+        "name": "double",
+        "main": "variable-type",
+        "side": "capital",
+        "alternative":[
+            "real"
+        ],
+        "description": "A normal-size, floating-point numbers. Allowable values are:\n-1.7976931348623157E+308 to -2.2250738585072014E-308\n0\n2.2250738585072014E-308 to 1.7976931348623157E+308"
+    },
+    {
+        "name": "float",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A small, floating-point number. Allowable values are:\n-3.402823466E+38 to -1.175494351E-38\n0\n1.175494351E-38 to 3.402823466E+38.",
         "args":[
             {
-                "name":"date1",
-                "type":"date",
-                "description":null
+                "name":"m",
+                "type":"number int"
             },
             {
-                "name":"date2",
-                "type":"date",
-                "description":null
+                "name":"d",
+                "type":"number int",
+                "optional":true
             }
         ]
     },
     {
-        "name":"ifnull",
-        "main":"function",
-        "side":"flow-control italic",
-        "description":"Return the first argument if it is NOT NULL (or the second if it is).",
+        "name": "decimal",
+        "main": "variable-type",
+        "side": "capital",
+        "alternative":[
+            "numeric",
+            "fixed",
+            "dec"
+        ],
+        "description": "Exact decimal values specified in the format (M, D); the maximum number of digits for M is 65, while for D it is 35.",
         "args":[
             {
-                "name":"data",
-                "type":"any",
-                "description":"The param which might be null."
+                "name":"m",
+                "type":"number int",
+                "description":"length, default 10"
             },
             {
-                "name":"onnull",
+                "name":"d",
+                "type":"number int",
+                "optional":true,
+                "description":"length of decimal places, default 0"
+            }
+        ]
+    },
+    {
+        "name": "char",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "Fixed-length character strings that specify the maximum number of characters it stores (up to 254 characters).",
+        "args":[
+            {
+                "name":"length",
+                "type":"number int",
+                "description":"length of the string"
+            }
+        ]
+    },
+    {
+        "name": "varchar",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "Variable-length strings that specify the maximum number of characters it stores (up to 65535).",
+        "args":[
+            {
+                "name":"length",
+                "type":"number int",
+                "description":"length of the string, maximum 65535"
+            }
+        ]
+    },
+    {
+        "name": "binary",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A binary byte string.",
+        "args":[
+            {
+                "name":"m",
+                "type":"number int",
+                "description":"the column length in bytes."
+            }
+        ]
+    },
+    {
+        "name": "varbinary",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A binary byte string of variable length.",
+        "args":[
+            {
+                "name":"m",
+                "type":"number int",
+                "description":"the column length in bytes."
+            }
+        ]
+    },
+    {
+        "name": "tinytext",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A text column with a maximum length of 255 (2^8- 1) characters."
+    },
+    {
+        "name": "text",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A text column with a maximum length of 65,535 (2^16 - 1) characters."
+    },
+    {
+        "name": "mediumtext",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A text column with a maximum length of 16,777,215 (2^24 - 1) characters."
+    },
+    {
+        "name": "longtext",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A text column with a maximum length of 4,294,967,295 or 4GB (2^32 - 1) characters."
+    },
+    {
+        "name": "tinyblob",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A blob column with a maximum length of 255 (2^8 - 1) bytes."
+    },
+    {
+        "name": "blob",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A blob column with a maximum length of 65,535 (2^16 - 1) bytes."
+    },
+    {
+        "name": "mediumblob",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A blob column with a maximum length of 16,777,215 (2^24 - 1) bytes."
+    },
+    {
+        "name": "longblob",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "A blob column with a maximum length of 4,294,967,295(2^32 - 1) bytes."
+    },
+    {
+        "name": "date",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "Stores data values in the format YYYY-MM-DD."
+    },
+    {
+        "name": "datetime",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "Contains both date and time, but has a range from 1970-01-01 00:00:01' UTC to '2038-01-19 03:14:07' UTC."
+    },
+    {
+        "name": "timestamp",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "Values range from '1970-01-01 00:00:01' UTC to '2038-01-19 03:14:07' UTC."
+    },
+    {
+        "name": "year",
+        "main": "variable-type",
+        "side": "capital",
+        "description": "Year value as 2 digits or 4 digits."
+    },
+    {
+        "name": "select",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "from",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "where",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "distinct",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "as",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "between",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "case",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "then",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "if",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "else",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "end",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "create",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "inner",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "outer",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "join",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "on",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "width",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "order",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "by",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "having",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "drop",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "add",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "alter",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "exists",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "table",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "column",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "database",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "constraint",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "primary",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "key",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "foreign",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "for",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "each",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "row",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "begin",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "function",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "procedure",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "set",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "values",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "grant",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "revoke",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "privilege",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "identifier",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "delimiter",
+        "main": "statement",
+        "side": "capital"
+    },
+    {
+        "name": "isdate",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Checks an expression and returns 1 if it is a valid date, otherwise 0.",
+        "args": [
+            {
+                "name": "expression",
+                "type": "any",
+                "description": "Required. The expression to test"
+            }
+        ]
+    },
+    {
+        "name": "getutcdate",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Returns the current database system UTC date and time, in a 'YYYY-MM-DD hh:mm:ss.mmm' format.",
+        "args": []
+    },
+    {
+        "name": "getdate",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Returns the current database system date and time, in a 'YYYY-MM-DD hh:mm:ss.mmm' format.",
+        "args": []
+    },
+    {
+        "name": "dateiff",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Calculate the number of days between two dates.",
+        "args": [
+            {
+                "name": "date1",
+                "type": "date",
+                "description": null
+            },
+            {
+                "name": "date2",
+                "type": "date",
+                "description": null
+            }
+        ]
+    },
+    {
+        "name": "datefromparts",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Calculate the number of days between two dates.",
+        "args": [
+            {
+                "name": "year",
+                "type": "number int",
+                "description": "Required. Specifies a year (4 digits)"
+            },
+            {
+                "name": "month",
+                "type": "number int",
+                "description": "Required. Specifies a month (from 1 to 12)"
+            },
+            {
+                "name": "day",
+                "type": "number int",
+                "description": "Required. Specifies a day (from 1 to 31)"
+            }
+        ]
+    },
+    {
+        "name": "datename",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Returns a specified part of a date.",
+        "args": [
+            {
+                "name": "interval",
+                "type": "enum pure",
+                "description": "Required. The part to return. Can be one of the following values:\nYear\tyear, yyyy, yy\nQuarter\tquarter, qq, q\nMonth\tmonth, mm, m\nDay of the year\tdayofyear\nDay\tday, dy, y\nWeek\tweek, ww, wk\nWeekday\tweekday, dw, w\nHour\thour, hh\nMinute\tminute, mi, n\nSecond\tsecond, ss, s\nMillisecond\tmillisecond",
+                "enum":[
+                    {
+                        "name": "Year",
+                        "form": "year",
+                        "alternatives": [
+                            "yyyy",
+                            "yy"
+                        ]
+                    },
+                    {
+                        "name": "Quarter",
+                        "form": "quarter",
+                        "alternatives": [
+                            "qq",
+                            "q"
+                        ]
+                    },
+                    {
+                        "name": "Month",
+                        "form": "month",
+                        "alternatives": [
+                            "mm",
+                            "m"
+                        ]
+                    },
+                    {
+                        "name": "Day of the year",
+                        "form": "dayofyear",
+                        "alternatives": [
+                            "dy",
+                            "y"
+                        ]
+                    },
+                    {
+                        "name": "Day",
+                        "form": "day",
+                        "alternatives": [
+                            "dd",
+                            "d"
+                        ]
+                    },
+                    {
+                        "name": "Week",
+                        "form": "week",
+                        "alternatives": [
+                            "ww",
+                            "wk"
+                        ]
+                    },
+                    {
+                        "name": "Weekday",
+                        "form": "weekday",
+                        "alternatives": [
+                            "dw",
+                            "w"
+                        ]
+                    },
+                    {
+                        "name": "Hour",
+                        "form": "hour",
+                        "alternatives": [
+                            "hh"
+                        ]
+                    },
+                    {
+                        "name": "Minute",
+                        "form": "minute",
+                        "alternatives": [
+                            "mi",
+                            "n"
+                        ]
+                    },
+                    {
+                        "name": "Second",
+                        "form": "second",
+                        "alternatives": [
+                            "ss",
+                            "s"
+                        ]
+                    },
+                    {
+                        "name": "Millisecond",
+                        "form": "millisecond",
+                        "alternatives": [
+                            "ms"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "date",
+                "type": "date datetime",
+                "description": "Required. The date to use"
+            }
+        ]
+    },
+    {
+        "name": "datepart",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Returns a specified part of a date.",
+        "args": [
+            {
+                "name": "interval",
+                "type": "enum pure",
+                "description": "Required. The part of the date argument to return. Can be one of the following values:\nYear\tyear, yyyy, yy\nQuarter\tquarter, qq, q\nMonth\tmonth, mm, m\nDay of the year\tdayofyear, dy, y\nDay of the month\tday, dd, d\nWeek\tweek, ww, wk\nWeekday\tweekday, dw, w\nHour\thour, hh\nMinute\tminute, mi, n\nSecond\tsecond, ss, s\nMillisecond\tmillisecond, ms\nMicrosecond\tmicrosecond, mcs\nNanosecond\tnanosecond, ns\nTimezone offset\ttzoffset, tz\nISO week\tiso_week, isowk, isoww",
+                "enum":[
+                    {
+                        "name": "Year",
+                        "form": "year",
+                        "alternatives": [
+                            "yyyy",
+                            "yy"
+                        ]
+                    },
+                    {
+                        "name": "Quarter",
+                        "form": "quarter",
+                        "alternatives": [
+                            "qq",
+                            "q"
+                        ]
+                    },
+                    {
+                        "name": "Month",
+                        "form": "month",
+                        "alternatives": [
+                            "mm",
+                            "m"
+                        ]
+                    },
+                    {
+                        "name": "Day of the year",
+                        "form": "dayofyear",
+                        "alternatives": [
+                            "dy",
+                            "y"
+                        ]
+                    },
+                    {
+                        "name": "Day",
+                        "form": "day",
+                        "alternatives": [
+                            "dd",
+                            "d"
+                        ]
+                    },
+                    {
+                        "name": "Week",
+                        "form": "week",
+                        "alternatives": [
+                            "ww",
+                            "wk"
+                        ]
+                    },
+                    {
+                        "name": "Weekday",
+                        "form": "weekday",
+                        "alternatives": [
+                            "dw",
+                            "w"
+                        ]
+                    },
+                    {
+                        "name": "Hour",
+                        "form": "hour",
+                        "alternatives": [
+                            "hh"
+                        ]
+                    },
+                    {
+                        "name": "Minute",
+                        "form": "minute",
+                        "alternatives": [
+                            "mi",
+                            "n"
+                        ]
+                    },
+                    {
+                        "name": "Second",
+                        "form": "second",
+                        "alternatives": [
+                            "ss",
+                            "s"
+                        ]
+                    },
+                    {
+                        "name": "Millisecond",
+                        "form": "millisecond",
+                        "alternatives": [
+                            "ms"
+                        ]
+                    },
+                    {
+                        "name": "Microsecond",
+                        "form": "microsecond",
+                        "alternatives": [
+                            "mcs"
+                        ]
+                    },
+                    {
+                        "name": "Nanosecond",
+                        "form": "nanosecond",
+                        "alternatives": [
+                            "ns"
+                        ]
+                    },
+                    {
+                        "name": "Timezone offset",
+                        "form": "tzoffset",
+                        "alternatives": [
+                            "tz"
+                        ]
+                    },
+                    {
+                        "name": "ISO week",
+                        "form": "iso_week",
+                        "alternatives": [
+                            "isowwk",
+                            "isoww"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "date",
+                "type": "date datetime",
+                "description": "Required. The date to use"
+            }
+        ]
+    },
+    {
+        "name": "day",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Return the day of the month of the specified date.",
+        "args": [
+            {
+                "name": "date",
+                "type": "date datetime",
+                "description": "Required. The date or datetime to extract the day from"
+            }
+        ]
+    },
+    {
+        "name": "month",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Return the day of the month of the specified date.",
+        "args": [
+            {
+                "name": "date",
+                "type": "date datetime",
+                "description": "Required. The date or datetime to extract the month from"
+            }
+        ]
+    },
+    {
+        "name": "year",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Returns the year part for a specified date.",
+        "args": [
+            {
+                "name": "date",
+                "type": "date datetime",
+                "description": "Required. The date or datetime to extract the year from"
+            }
+        ]
+    },
+    {
+        "name": "date_add",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Add a time/date interval to a date value.",
+        "args": [
+            {
+                "name": "interval",
+                "type": "enum pure",
+                "enum": [
+                    {
+                        "name": "Year",
+                        "form": "year",
+                        "alternatives": [
+                            "yyyy",
+                            "yy"
+                        ]
+                    },
+                    {
+                        "name": "Quarter",
+                        "form": "quarter",
+                        "alternatives": [
+                            "qq",
+                            "q"
+                        ]
+                    },
+                    {
+                        "name": "Month",
+                        "form": "month",
+                        "alternatives": [
+                            "mm",
+                            "m"
+                        ]
+                    },
+                    {
+                        "name": "Day of the year",
+                        "form": "dayofyear",
+                        "alternatives": [
+                            "dy",
+                            "y"
+                        ]
+                    },
+                    {
+                        "name": "Day",
+                        "form": "day",
+                        "alternatives": [
+                            "dd",
+                            "d"
+                        ]
+                    },
+                    {
+                        "name": "Week",
+                        "form": "week",
+                        "alternatives": [
+                            "ww",
+                            "wk"
+                        ]
+                    },
+                    {
+                        "name": "Weekday",
+                        "form": "weekday",
+                        "alternatives": [
+                            "dw",
+                            "w"
+                        ]
+                    },
+                    {
+                        "name": "Hour",
+                        "form": "hour",
+                        "alternatives": [
+                            "hh"
+                        ]
+                    },
+                    {
+                        "name": "Minute",
+                        "form": "minute",
+                        "alternatives": [
+                            "mi",
+                            "n"
+                        ]
+                    },
+                    {
+                        "name": "Second",
+                        "form": "second",
+                        "alternatives": [
+                            "ss",
+                            "s"
+                        ]
+                    },
+                    {
+                        "name": "Millisecond",
+                        "form": "millisecond",
+                        "alternatives": [
+                            "ms"
+                        ]
+                    }
+                ],
+                "description": "Required. The time/date interval to add. Can be one of the following values:\nyear, yyyy, yy = Year\nquarter, qq, q = Quarter\nmonth, mm, m = month\ndayofyear, dy, y = Day of the year\nday, dd, d = Day\nweek, ww, wk = Week\nweekday, dw, w = Weekday\nhour, hh = hour\nminute, mi, n = Minute\nsecond, ss, s = Second\nmillisecond, ms = Millisecond"
+            },
+            {
+                "name": "number",
+                "type": "number int",
+                "description": "Required. The number of interval to add to date. Can be positive (to get dates in the future) or negative (to get dates in the past)"
+            },
+            {
+                "name": "date",
+                "type": "date datetime",
+                "description": "Required. The date that will be modified"
+            }
+        ]
+    },
+    {
+        "name": "date_sub",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Subtract a time/date interval from a data value.",
+        "args": [
+            {
+                "name": "date",
+                "type": "date datetime"
+            },
+            {
+                "name": "static",
+                "type": "enum pure",
+                "enum": [
+                    {
+                        "name": "interval",
+                        "form": "INTERVAL",
+                        "description": "Required, syntactical element"
+                    }
+                ]
+            },
+            {
+                "name": "value",
+                "type": "number int"
+            },
+            {
+                "name": "interval",
+                "type": "enum pure",
+                "enum": [
+                    {
+                        "name": "Years from months",
+                        "form": "YEAR_MONTH"
+                    },
+                    {
+                        "name": "Days from Hours",
+                        "form": "DAY_HOUR"
+                    },
+                    {
+                        "name": "Days from minutes",
+                        "form": "DAY_MINUTE"
+                    },
+                    {
+                        "name": "Days from seconds",
+                        "form": "DAY_SECOND"
+                    },
+                    {
+                        "name": "Days from microseconds",
+                        "form": "DAY_MICROSECOND"
+                    },
+                    {
+                        "name": "Hours from minutes",
+                        "form": "HOUR_MINUTE"
+                    },
+                    {
+                        "name": "Hours from seconds",
+                        "form": "HOUR_SECOND"
+                    },
+                    {
+                        "name": "Hours from microseconds",
+                        "form": "HOUR_MICROSECOND"
+                    },
+                    {
+                        "name": "Minutes from seconds",
+                        "form": "MINUTE_SECOND"
+                    },
+                    {
+                        "name": "Minutes from microseconds",
+                        "form": "MINUTE_MICROSECOND"
+                    },
+                    {
+                        "name": "Seconds from microseconds",
+                        "form": "SECOND_MICROSECOND"
+                    },
+                    {
+                        "name": "Years",
+                        "form": "YEAR"
+                    },
+                    {
+                        "name": "Quarters",
+                        "form": "QUARTER"
+                    },
+                    {
+                        "name": "Months",
+                        "form": "MONTH"
+                    },
+                    {
+                        "name": "Weeks",
+                        "form": "WEEK"
+                    },
+                    {
+                        "name": "Days",
+                        "form": "DAY"
+                    },
+                    {
+                        "name": "Hours",
+                        "form": "HOUR"
+                    },
+                    {
+                        "name": "Minutes",
+                        "form": "MINUTE"
+                    },
+                    {
+                        "name": "Seconds",
+                        "form": "SECOND"
+                    },
+                    {
+                        "name": "Microseconds",
+                        "form": "MICROSECOND"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "date_format",
+        "main": "function",
+        "side": "datetime italic capital",
+        "description": "Format a date based on the specified format.",
+        "args": [
+            {
+                "name": "date",
+                "type": "date datetime",
+                "description": "Required. The date to be formatted"
+            },
+            {
+                "name": "format",
+                "type": "string flaged-string case-sensitive no-separator",
+                "description": "Required. The format to use. Can be one or a combination of the following values:\n%a\tAbbreviated weekday name (Sun to Sat)\n%b\tAbbreviated month name (Jan to Dec)\n%c\tNumeric month name (0 to 12)\n%D\tDay of the month as a numeric value, followed by suffix (1st, 2nd, 3rd, ...)\n%d\tDay of the month as a numeric value (01 to 31)\n%e\tDay of the month as a numeric value (0 to 31)\n%f\tMicroseconds (000000 to 999999)\n%H\tHour (00 to 23)\n%h\tHour (00 to 12)\n%I\tHour (00 to 12)\n%i\tMinutes (00 to 59)\n%j\tDay of the year (001 to 366)\n%k\tHour (0 to 23)\n%l\tHour (1 to 12)\n%M\tMonth name in full (January to December)\n%m\tMonth name as a numeric value (00 to 12)\n%p\tAM or PM\n%r\tTime in 12 hour AM or PM format (hh:mm:ss AM/PM)\n%S\tSeconds (00 to 59)\n%s\tSeconds (00 to 59)\n%T\tTime in 24 hour format (hh:mm:ss)\n%U\tWeek where Sunday is the first day of the week (00 to 53)\n%u\tWeek where Monday is the first day of the week (00 to 53)\n%V\tWeek where Sunday is the first day of the week (01 to 53). Used with %X\n%v\tWeek where Monday is the first day of the week (01 to 53). Used with %x\n%W\tWeekday name in full (Sunday to Saturday)\n%w\tDay of the week where Sunday=0 and Saturday=6\n%X\tYear for the week where Sunday is the first day of the week. Used with %V\n%x\tYear for the week where Monday is the first day of the week. Used with %v\n%Y\tYear as a numeric, 4-digit value\n%y\tYear as a numeric, 2-digit value",
+                "flags": [
+                    {
+                        "label": "%a",
+                        "description": "Abbreviated weekday name (Sun to Sat)"
+                    },
+                    {
+                        "label": "%b",
+                        "description": "Abbreviated month name (Jan to Dec)"
+                    },
+                    {
+                        "label": "%c",
+                        "description": "Numeric month name (0 to 12)"
+                    },
+                    {
+                        "label": "%D",
+                        "description": "Day of the month as a numeric value, followed by suffix (1st, 2nd, 3rd, ...)"
+                    },
+                    {
+                        "label": "%d",
+                        "description": "Day of the month as a numeric value (01 to 31)"
+                    },
+                    {
+                        "label": "%e",
+                        "description": "Day of the month as a numeric value (0 to 31)"
+                    },
+                    {
+                        "label": "%f",
+                        "description": "Microseconds (000000 to 999999)"
+                    },
+                    {
+                        "label": "%H",
+                        "description": "Hour (00 to 23)"
+                    },
+                    {
+                        "label": "%h",
+                        "description": "Hour (00 to 12)"
+                    },
+                    {
+                        "label": "%I",
+                        "description": "Hour (00 to 12)"
+                    },
+                    {
+                        "label": "%i",
+                        "description": "Minutes (00 to 59)"
+                    },
+                    {
+                        "label": "%j",
+                        "description": "Day of the year (001 to 366)"
+                    },
+                    {
+                        "label": "%k",
+                        "description": "Hour (0 to 23)"
+                    },
+                    {
+                        "label": "%l",
+                        "description": "Hour (1 to 12)"
+                    },
+                    {
+                        "label": "%M",
+                        "description": "Month name in full (January to December)"
+                    },
+                    {
+                        "label": "%m",
+                        "description": "Month name as a numeric value (00 to 12)"
+                    },
+                    {
+                        "label": "%p",
+                        "description": "AM or PM"
+                    },
+                    {
+                        "label": "%r",
+                        "description": "Time in 12 hour AM or PM format (hh:mm:ss AM/PM)"
+                    },
+                    {
+                        "label": "%S",
+                        "description": "Seconds (00 to 59)"
+                    },
+                    {
+                        "label": "%s",
+                        "description": "Seconds (00 to 59)"
+                    },
+                    {
+                        "label": "%T",
+                        "description": "Time in 24 hour format (hh:mm:ss)"
+                    },
+                    {
+                        "label": "%U",
+                        "description": "Week where Sunday is the first day of the week (00 to 53)"
+                    },
+                    {
+                        "label": "%u",
+                        "description": "Week where Monday is the first day of the week (00 to 53)"
+                    },
+                    {
+                        "label": "%V",
+                        "description": "Week where Sunday is the first day of the week (01 to 53). Used with %X"
+                    },
+                    {
+                        "label": "%v",
+                        "description": "Week where Monday is the first day of the week (01 to 53). Used with %x"
+                    },
+                    {
+                        "label": "%W",
+                        "description": "Weekday name in full (Sunday to Saturday)"
+                    },
+                    {
+                        "label": "%w",
+                        "description": "Day of the week where Sunday=0 and Saturday=6"
+                    },
+                    {
+                        "label": "%X",
+                        "description": "Year for the week where Sunday is the first day of the week. Used with %V"
+                    },
+                    {
+                        "label": "%x",
+                        "description": "Year for the week where Monday is the first day of the week. Used with %v"
+                    },
+                    {
+                        "label": "%Y",
+                        "description": "Year as a numeric, 4-digit value"
+                    },
+                    {
+                        "label": "%y",
+                        "description": "Year as a numeric, 2-digit value"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "abs",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the absolute value.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "acos",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the arc cosine of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value\nThe specified number must be between -1 to 1, otherwise this function returns NULL."
+            }
+        ]
+    },
+    {
+        "name": "cos",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the cosine of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "cot",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the cotangent of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "asin",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the arc sine of a number.\nThe specified number must be between -1 to 1, otherwise this function returns NULL.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "sin",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the sine of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "atan",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the arc tangent of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "tan",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the tangent of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "atn2",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Return the arc tangent of two numbers.",
+        "args": [
+            {
+                "name": "a",
+                "type": "number int double",
+                "description": "Required. The first value"
+            },
+            {
+                "name": "b",
+                "type": "number int double",
+                "description": "Required. The second value"
+            }
+        ]
+    },
+    {
+        "name": "round",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Rounds to a specified number of decimal places.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. The number to be rounded"
+            },
+            {
+                "name": "decimals",
+                "type": "number int",
+                "description": "Required. The number of decimal places to round number to"
+            },
+            {
+                "name": "operation",
+                "type": "number int",
+                "optional":true,
+                "default":0,
+                "description": "Optional. If 0, it rounds the result to the number of decimal. If another value than 0, it truncates the result to the number of decimals. Default value is 0"
+            }
+        ]
+    },
+    {
+        "name": "avg",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the average value of an expression.",
+        "args": [
+            {
+                "name": "expression",
+                "type": "expression query-result single-column numeric-column numeric",
+                "description": "Required. A numeric value (can be a field or a formula)\nNote: NULL values are ignored"
+            }
+        ]
+    },
+    {
+        "name": "min",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the minimum value in a set of values.",
+        "args": [
+            {
+                "name": "expression",
+                "type": "expression query-result single-column numeric-column numeric",
+                "description": "Required. A numeric value (can be a field or a formula)"
+            }
+        ]
+    },
+    {
+        "name": "max",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the maximum value in a set of values.",
+        "args": [
+            {
+                "name": "expression",
+                "type": "expression query-result single-column numeric-column numeric",
+                "description": "Required. A numeric value (can be a field or a formula)"
+            }
+        ]
+    },
+    {
+        "name": "sum",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Calculates the sum of a set of values.",
+        "args": [
+            {
+                "name": "expression",
+                "type": "expression query-result single-column numeric-column",
+                "description": "Required. A field or a formula"
+            }
+        ]
+    },
+    {
+        "name": "count",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the number of records returned by a select query.",
+        "args": [
+            {
+                "name": "expression",
+                "type": "expression query-result multi-columns single-column",
+                "description": "Required. A field or a string value"
+            }
+        ]
+    },
+    {
+        "name": "ceiling",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the smallest integer value that is larger than or equal to a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "degrees",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Converts a value in radians to degrees.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A number in radians"
+            }
+        ]
+    },
+    {
+        "name": "radians",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Converts a value in degrees to radians.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A number in degrees"
+            }
+        ]
+    },
+    {
+        "name": "sign",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the sign of a number.\nThis function will return one of the following:\n> 0\t1\n= 0\t0\n< 0\t-1",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int",
+                "description": "Required. The number to return the sign for"
+            }
+        ]
+    },
+    {
+        "name": "exp",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns e raised to the power of a specified number.\nThe constant e (2.718281...), is the base of natural logarithms.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. The power number"
+            }
+        ]
+    },
+    {
+        "name": "floor",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the largest integer value that is smaller than or equal to a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A numeric value"
+            }
+        ]
+    },
+    {
+        "name": "log",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns either the natural logarithm of a number if called with one parameter, or the logarithm of a number to a specified base if called with two parameters.",
+        "args": [
+            {
+                "name": "base",
+                "type": "number int double",
+                "optional":true,
+                "description": "The base the natural logarithm is to be calculated with. Must be greater than 1."
+            },
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. The number to take the natural logarithm of. Must be greater than 0."
+            }
+        ]
+    },
+    {
+        "name": "pi",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the value of PI.",
+        "args": []
+    },
+    {
+        "name": "rand",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "The RAND() function returns a random number between 0 (inclusive) and 1 (exclusive).",
+        "args": [
+            {
+                "name": "seed",
+                "type": "number int double",
+                "optional":true,
+                "description": "Optional. If seed is specified, it returns a repeatable sequence of random numbers. If no seed is specified, it returns a completely random number"
+            }
+        ]
+    },
+    {
+        "name": "sqrt",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the square root of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A positive number to calculate the square root of"
+            }
+        ]
+    },
+    {
+        "name": "square",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the square of a number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int double",
+                "description": "Required. A positive number to calculate the square of"
+            }
+        ]
+    },
+    {
+        "name": "power",
+        "main": "function",
+        "side": "math italic capital",
+        "description": "Returns the value of a number raised to the power of another number.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int",
+                "description": "Required. A number (the base)"
+            },
+            {
+                "name": "number",
+                "type": "number int",
+                "description": "Required. A number (the exponent)"
+            }
+        ]
+    },
+    {
+        "name": "ascii",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns the ASCII value for the specific character.",
+        "args": [
+            {
+                "name": "character",
+                "type": "string char",
+                "description": "Required. The character to return the ASCII value for. If more than one character is entered, it will only return the value for the first character"
+            }
+        ]
+    },
+    {
+        "name": "char",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns the character based on the ASCII code.",
+        "args": [
+            {
+                "name": "code",
+                "type": "number int",
+                "description": "Required. The ASCII number code to return the character for"
+            }
+        ]
+    },
+    {
+        "name": "nchar",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns the Unicode character based on the number code.",
+        "args": [
+            {
+                "name": "code",
+                "type": "number int",
+                "description": "Required. The number code in the Unicode standard to return the character for"
+            }
+        ]
+    },
+    {
+        "name": "charindex",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Searches for a substring in a string, and returns the position.\nIf the substring is not found, this function returns 0.\nNote: This function performs a case-insensitive search.",
+        "args": [
+            {
+                "name": "substring",
+                "type": "string",
+                "description": "Required. The substring to search for"
+            },
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to be searched"
+            },
+            {
+                "name": "start",
+                "type": "number int",
+                "description": "Optional. The position where the search will start (if you do not want to start at the beginning of string). The first position in string is 1"
+            }
+        ]
+    },
+    {
+        "name": "concat",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Adds two or more strings together.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "infinite":true,
+                "description": "Required. The strings to add together"
+            }
+        ]
+    },
+    {
+        "name": "concat_ws",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Adds two or more strings together with a separator.",
+        "args": [
+            {
+                "name": "separator",
+                "type": "string",
+                "description": "Required. The separator to use"
+            },
+            {
+                "name": "string",
+                "type": "string",
+                "infinite":true,
+                "description": "Required. The strings to add together"
+            }
+        ]
+    },
+    {
+        "name": "datalength",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns the number of bytes used to represent an expression.\nNote: The DATALENGTH() function counts both leading and trailing spaces when calculating the length of the expression.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required."
+            }
+        ]
+    },
+    {
+        "name": "len",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns the length of a string.\nNote: Trailing spaces at the end of the string is not included when calculating the length. However, leading spaces at the start of the string is included when calculating the length.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description":"Required. The string to return the length for. If string is NULL, it returns NULL"
+            }
+        ]
+    },
+    {
+        "name": "format",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Formats a value with the specified format",
+        "args": [
+            {
+                "name": "value",
+                "type": "number int double string char",
+                "description": "Required."
+            },
+            {
+                "name": "format",
+                "type": "string",
+                "description": "Required."
+            }
+        ]
+    },
+    {
+        "name": "left",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Extracts a number of characters from a string (starting from left).",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to extract from"
+            },
+            {
+                "name": "number_of_chars",
+                "type": "number int",
+                "description": "Required. The number of characters to extract. If the number exceeds the number of characters in string, it returns string"
+            }
+        ]
+    },
+    {
+        "name": "right",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Extracts a number of characters from a string (starting from right).",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to extract from"
+            },
+            {
+                "name": "number_of_chars",
+                "type": "number int",
+                "description": "Required. The number of characters to extract. If the number exceeds the number of characters in string, it returns string"
+            }
+        ]
+    },
+    {
+        "name": "quotename",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns a Unicode string with delimiters added to make the string a valid SQL Server delimited identifier.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string char",
+                "description": "Required. A string of Unicode character data. Limited to 128 characters"
+            },
+            {
+                "name": "quote_char",
+                "type": "string char",
+                "optional":true,
+                "description": "A one-character string to use as the delimiter. Can be a single quotation mark ( ' ), a left or right bracket ( [] ), a double quotation mark ( \" ), a left or right parenthesis ( () ), a greater than or less than sign ( >< ), a left or right brace ( {} ) or a backtick ( ` ). If quote_char is not specified, brackets are used."
+            }
+        ]
+    },
+    {
+        "name": "replicate",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Repeats a string a specified number of times.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to repeat"
+            },
+            {
+                "name": "integer",
+                "type": "number int",
+                "description": "Required. The number of times to repeat the string"
+            }
+        ]
+    },
+    {
+        "name": "reverse",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Reverses a string and returns the result.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to reverse"
+            }
+        ]
+    },
+    {
+        "name": "space",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns a string of the specified number of space characters.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int",
+                "description": "Required. The number of spaces to be returned"
+            }
+        ]
+    },
+    {
+        "name": "unicode",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns an integer value (the Unicode value), for the first character of the input expression.",
+        "args": [
+            {
+                "name": "string",
+                "type": "nchar varchar",
+                "description": "Required. An nchar or varchar expression"
+            }
+        ]
+    },
+    {
+        "name": "trim",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Temoves the space character OR other specified characters from the start or end of a string.\nBy default, the TRIM() function removes leading and trailing spaces from a string.",
+        "args": [
+            {
+                "name": "characters",
+                "type": "string",
+                "optional":true,
+                "description": "Optional. Specific characters to remove"
+            },
+            {
+                "name": "from",
+                "type": "static",
+                "optional":true,
+                "required-if":"characters",
+                "description": "Required only if characters present"
+            },
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to remove spaces or characters from"
+            }
+        ]
+    },
+    {
+        "name": "ltrim",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Removes leading spaces from the left of a string.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to remove leading spaces from it's left"
+            }
+        ]
+    },
+    {
+        "name": "rtrim",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Removes leading spaces from the right of a string.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to remove leading spaces from it's left"
+            }
+        ]
+    },
+    {
+        "name": "str",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns a number as a string.",
+        "args": [
+            {
+                "name": "number",
+                "type": "number int decimal",
+                "description": "Required. The number to convert to a string"
+            },
+            {
+                "name": "length",
+                "type": "number int",
+                "optional":true,
+                "description": "Optional. The length of the returning string. Default value is 10"
+            },
+            {
+                "name": "decimals",
+                "type": "number int",
+                "optional":true,
+                "description": "Optional. The number of decimals to display in the returning string. Default value is 0"
+            }
+        ]
+    },
+    {
+        "name": "upper",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Converts a string to upper-case.",
+        "args": [
+            {
+                "name": "text",
+                "type": "string char varchar",
+                "description": "Required. The string to convert"
+            }
+        ]
+    },
+    {
+        "name": "lower",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Converts a string to lower-case.",
+        "args": [
+            {
+                "name": "text",
+                "type": "string char varchar",
+                "description": "Required. The string to convert"
+            }
+        ]
+    },
+    {
+        "name": "replace",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Replaces all occurrences of a substring within a string, with a new substring.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string char varchar",
+                "description": "Required. The original string"
+            },
+            {
+                "name": "old_string",
+                "type": "string char varchar",
+                "description": "Required. The string to be replaced"
+            },
+            {
+                "name": "new_string",
+                "type": "string char varchar",
+                "description": "Required. The new replacement string"
+            }
+        ]
+    },
+    {
+        "name": "substring",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Extracts some characters from a string.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string",
+                "description": "Required. The string to extract from"
+            },
+            {
+                "name": "start",
+                "type": "number int",
+                "description": "Required. The start position. The first position in string is 1"
+            },
+            {
+                "name": "length",
+                "type": "number int",
+                "description": "Required. The number of characters to extract. Must be a positive number"
+            }
+        ]
+    },
+    {
+        "name": "translate",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns the string from the first argument after the characters specified in the second argument are translated into the characters specified in the third argument.\nNote: The TRANSLATE() function will return an error if characters and translations have different lengths.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string char varchar",
+                "description": "Required. The input string"
+            },
+            {
+                "name": "characters",
+                "type": "string char varchar",
+                "description": "Required. The characters that should be replaced"
+            },
+            {
+                "name": "translation",
+                "type": "string char varchar",
+                "description": "Required. The new characters"
+            }
+        ]
+    },
+    {
+        "name": "stuff",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Deletes a part of a string and then inserts another part into the string, starting at a specified position.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string char varchar",
+                "description": "Required."
+            },
+            {
+                "name": "start",
+                "type": "number int",
+                "description": "Required."
+            },
+            {
+                "name": "length",
+                "type": "number int",
+                "description": "Required."
+            },
+            {
+                "name": "new_string",
+                "type": "string char varchar",
+                "description": "Required."
+            }
+        ]
+    },
+    {
+        "name": "patindex",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns the position of a pattern in a string.\nIf the pattern is not found, this function returns 0.",
+        "args": [
+            {
+                "name": "pattern",
+                "type": "string char varchar regex",
+                "description": "Required. The pattern to find. It MUST be surrounded by %. Other wildcards can be used in pattern"
+            },
+            {
+                "name": "string",
+                "type": "string char varchar",
+                "description": "Required. The string to be searched"
+            }
+        ]
+    },
+    {
+        "name": "soundex",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns a four-character code to evaluate the similarity of two expressions.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string char varchar column single-column string-column",
+                "description": "The expression to evaluate. Can be a constant, variable, or column"
+            }
+        ]
+    },
+    {
+        "name": "soundex",
+        "main": "function",
+        "side": "string italic capital",
+        "description": "Returns a four-character code to evaluate the similarity of two expressions.",
+        "args": [
+            {
+                "name": "string",
+                "type": "string char varchar column single-column string-column",
+                "infinite":true,
+                "description": "The expression to evaluate. Can be a constant, variable, or column"
+            }
+        ]
+    },
+    {
+        "name": "ifnull",
+        "main": "function",
+        "side": "flow-control italic",
+        "description": "Return the first argument if it is NOT NULL (or the second if it is).",
+        "args": [
+            {
+                "name": "data",
+                "type": "any",
+                "description": "The param which might be null."
+            },
+            {
+                "name": "onnull",
+                "type": "any",
+                "description": "The value if the given data is null."
+            }
+        ]
+    },
+    {
+        "name": "cast",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Converts a value (of any type) into a specified datatype.",
+        "args":[
+            {
+                "name":"expression",
                 "type":"any",
-                "description":"The value if the given data is null."
+                "description":"Required. The value to convert"
+            },
+            {
+                "name":"AS",
+                "type":"static",
+                "description":"Required. Syntactical element"
+            },
+            {
+                "name":"datatype",
+                "type":"variable-type",
+                "description":"Required. The datatype to convert expression to. Can be one of the following: bigint, int, smallint, tinyint, bit, decimal, numeric, money, smallmoney, float, real, datetime, smalldatetime, char, varchar, text, nchar, nvarchar, ntext, binary, varbinary, or image"
+            }
+        ]
+    },
+    {
+        "name": "convert",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Converts a value (of any type) into a specified datatype.",
+        "args":[
+            {
+                "name":"data_type",
+                "type":"variable-type",
+                "description":"Required. The datatype to convert expression to. Can be one of the following: bigint, int, smallint, tinyint, bit, decimal, numeric, money, smallmoney, float, real, datetime, smalldatetime, char, varchar, text, nchar, nvarchar, ntext, binary, varbinary, or image"
+            },
+            {
+                "name":"expression",
+                "type":"any",
+                "description":"Required. The value to convert to another data type"
+            },
+            {
+                "name":"style",
+                "type":"number int",
+                "optional":true,
+                "description":"Optional. The format used to convert between data types, such as a date or string format."
+            }
+        ]
+    },
+    {
+        "name": "coalesce",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Returns the first non-null value in a list.",
+        "args":[
+            {
+                "name":"val",
+                "type":"any",
+                "infinite":true,
+                "description":"Required. The values to test"
+            }
+        ]
+    },
+    {
+        "name": "iif",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Returns a value if a condition is TRUE, or another value if a condition is FALSE.",
+        "args":[
+            {
+                "name":"condition",
+                "type":"condition bool",
+                "description":"Required. The value to test"
+            },
+            {
+                "name":"value_if_true",
+                "type":"any",
+                "optional":true,
+                "description":"Optional. The value to return if condition is TRUE"
+            },
+            {
+                "name":"value_if_false",
+                "type":"any",
+                "optional":true,
+                "description":"Optional. The value to return if condition is FALSE"
+            }
+        ]
+    },
+    {
+        "name": "isnull",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Returns a specified value if the expression is NULL.",
+        "args":[
+            {
+                "name":"expression",
+                "type":"any",
+                "description":"Required. The expression to test whether is NULL"
+            },
+            {
+                "name":"value",
+                "type":"any",
+                "description":"Required. The value to return if expression is NULL"
+            }
+        ]
+    },
+    {
+        "name": "isnumeric",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Returns 1 if the expression is numeric, otherwise it returns 0.",
+        "args":[
+            {
+                "name":"expression",
+                "type":"any",
+                "description":"Required. The value to test"
+            }
+        ]
+    },
+    {
+        "name": "nullif",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Returns NULL if two expressions are equal, otherwise it returns the first expression.",
+        "args":[
+            {
+                "name":"first",
+                "type":"any",
+                "description":"Required. The first expressions to be compared"
+            },
+            {
+                "name":"second",
+                "type":"any",
+                "description":"Required. The second expressions to be compared"
+            }
+        ]
+    },
+    {
+        "name": "sessionproperty",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Returns the session settings for a specified option.",
+        "args":[
+            {
+                "name":"option",
+                "type":"enum string",
+                "enum":[
+                    {
+                        "name": "Ansi nulls",
+                        "form": "ANSI_NULLS"
+                    },
+                    {
+                        "name": "Ansi padding",
+                        "form": "ANSI_PADDING"
+                    },
+                    {
+                        "name": "Ansi warnings",
+                        "form": "ANSI_WARNINGS"
+                    },
+                    {
+                        "name": "Arithabort",
+                        "form": "ARITHABORT"
+                    },
+                    {
+                        "name": "Null concatenation returns null",
+                        "form": "CONCAT_NULL_YIELDS_NULL"
+                    },
+                    {
+                        "name": "Numeric roundabout",
+                        "form": "NUMERIC_ROUNDABOUT"
+                    },
+                    {
+                        "name": "Quoted identifier",
+                        "form": "QUOTED_IDENTIFIER"
+                    }
+                ],
+                "description":"Required. The option to retrieve the session settings for. Can be one of the following values:\nANSI_NULLS\nANSI_PADDING\nANSI_WARNINGS\nARITHABORT\nCONCAT_NULL_YIELDS_NULL\nNUMERIC_ROUNDABOUT\nQUOTED_IDENTIFIER"
+            }
+        ]
+    },
+    {
+        "name": "user_name",
+        "main": "function",
+        "side": "advanced italic capital",
+        "description": "Returns the database user name based on the specified id.\nIf no id is specified, this function will return the name of the current user.",
+        "args":[
+            {
+                "name":"id_number",
+                "type":"number int",
+                "optional":true,
+                "description":"Optional. The id number of a user in the database"
             }
         ]
     }
