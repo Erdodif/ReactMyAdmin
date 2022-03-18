@@ -39,7 +39,7 @@
         color: var(--on-secondary);
         z-index: 1;
         border: 0.4ch solid transparent;
-        &:empty ~ .Hint {
+        &.empty ~ .Hint {
             margin-block-start:.675em;
             margin-inline-start:.775em;
             position: absolute;

@@ -186,16 +186,54 @@ class ResultRow extends React.Component {
 }
 
 class QueryEditor extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            content: ""
+        }
+    }
+
     runHighlight = () => {
         document.getElementById("QueryHighlighted").innerHTML = Highlighter.getHighlighted(document.getElementById("QueryEditor").innerText);
+    }
+
+    handleChange = () => {
+        this.setState({ content: document.getElementById("QueryEditor").innerText });
     }
 
     render() {
         return (
             <div className='QueryEditor' spellCheck="false" onInput={this.runHighlight}>
-                <div id="QueryEditor" contentEditable></div>
-                <div className='QueryHighlighted' id='QueryHighlighted'></div>
+                <div id="QueryEditor" contentEditable onChange={this.handleChange}></div>
                 <div className='Hint'>{'SELECT * FROM ' + this.props.table + ';'}</div>
+                <QueryHighlighted content={this.state.content} />
+            </div>
+        );
+    }
+}
+
+class QueryHighlighted extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            components: []
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.table !== this.props.table) {
+            this.getQueryTable();
+            this.fillSuggestion();
+        }
+        if (prevState.query !== this.state.query) {
+            this.fillQueryResults();
+        }
+    }
+
+    render() {
+        return (
+            <div className={'QueryHighlighted' + (this.props.content.length === 0 ? " empty" : "")} id='QueryHighlighted' content={this.props.content}>
+                {this.state.components}
             </div>
         );
     }
