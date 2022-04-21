@@ -1,7 +1,7 @@
 {
     "name": "hu.petrik.reactmyadmin",
-    "version": "0.0.1",
-    "description": "A react application targeting the main features of phpMyAdmin",
+    "version": "0.2.0",
+    "description": "A react application targeting the key features of phpMyAdmin",
     "main": "index.js",
     "repository": {
         "type": "git",
@@ -16,13 +16,41 @@
         "api",
         "xampp"
     ],
-    "scripts":{
-        "postinstall": "cd client && npm install && cd ../server && npm install"
+    "scripts": {
+        "dev": "webpack serve",
+        "build": "webpack",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "serve": "npm run server",
+        "server": "node ./dist/server.jsx",
+        "watch": "nodemon ./dist/server.jsx"
     },
     "author": "Philip G. Woods",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/Erdodif/ReactMyAdmin/issues"
     },
-    "homepage": "https://github.com/Erdodif/ReactMyAdmin#readme"
+    "homepage": "https://github.com/Erdodif/ReactMyAdmin#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "css-loader": "^6.7.1",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "mysql": "^2.18.1",
+        "npm-watch": "^0.11.0",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
+        "style-loader": "^3.3.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-react": "^7.16.7",
+        "babel-loader": "^8.2.5",
+        "html-webpack-plugin": "^5.5.0",
+        "sass": "^1.50.1",
+        "sass-loader": "^12.6.0",
+        "webpack": "^5.72.0",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.8.1"
+    }
 }

@@ -1,9 +1,9 @@
-import './index.scss';
+import '../index.scss';
 import './App.scss';
 import React from 'react';
-import Sidebar from './Sidebar';
-import Navigation from './Navigation';
-import QueryPage from './QueryPage';
+import Sidebar from './components/querypage/Sidebar';
+import Navigation from './components/querypage/Navigation';
+import QueryPage from './components/querypage/QueryPage';
 const serverUrl = "http://" + process.env.REACT_APP_SERVER_HOST + ":" + process.env.REACT_APP_SERVER_PORT;
 
 class App extends React.Component {

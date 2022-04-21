@@ -1,19 +1,35 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const mysql = require('mysql');
+const React = require('react');
+const { renderToString } = require('react-dom/server');
+const App = require('../src/index');
+const template = require('../src/template.js');
+
 require('dotenv').config({path:"../.env"});
+const express = require('express');
+const mysql = require('mysql');
+const cors = require('cors');
+server = express();
+
 var corsOptions = {
-    origin: `http://localhost:${process.env.PORT}`
+    origin: `http://${process.env.SERVER_HOST}:${process.env.PORT}`
 }
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+server.use(cors(corsOptions));
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
 var conn = mysql.createConnection({
     host: process.env.SERVER_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD
+});
+
+server.get('/index', (req, res) =>{
+    const appString = renderToString(new App());
+
+    res.send(template({
+        body:appString,
+        title:'ReactMyAdmin Főoldal'
+    }))
 });
 
 function getResultByName(list, name) {
@@ -39,7 +55,7 @@ conn.connect(function (err) {
     console.log("Database connected");
 })
 
-app.get('/', (req, res) => {
+server.get('/api/', (req, res) => {
     try {
         conn.query("SHOW DATABASES", (err, result) => {
             if (err) return res.status(500).json({ error: err });
@@ -53,7 +69,7 @@ app.get('/', (req, res) => {
     }
 });
 
-app.post('/query',(req,res)=>{
+server.post('/api/query',(req,res)=>{
     try {
         let database = req.body["database"];
         let sql = req.body["sql"];
@@ -76,7 +92,7 @@ app.post('/query',(req,res)=>{
     }
 });
 
-app.get('/:database', (req, res) => {
+server.get('/api/:database', (req, res) => {
     try {
         let database = req.params["database"];
         connectToDatabase(database)
@@ -101,7 +117,7 @@ app.get('/:database', (req, res) => {
     }
 });
 
-app.get('/:database/:table', (req, res) => {
+server.get('/api/:database/:table', (req, res) => {
     try {
         let database = req.params["database"];
         let table = req.params["table"];
@@ -128,6 +144,6 @@ app.get('/:database/:table', (req, res) => {
 
 const PORT = process.env.SERVER_PORT || 8080;
 
-app.listen(PORT, () => {
-    console.log(`Running on port ${PORT}.`)
+server.listen(PORT, () => {
+    console.log(`Server running on port :${PORT}.`)
 });

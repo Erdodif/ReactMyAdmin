@@ -1,7 +1,4 @@
-server/node_modules
-client/node_modules
-client/build
-client/.env
 /.env
 *.code-workspace
 .vscode/
+node_modules

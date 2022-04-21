@@ -1,6 +1,6 @@
 import './QueryPage.scss';
 import React from "react";
-import Highlighter from "./highlighting";
+import Highlighter from "../../highlighting/highlighting";
 const CORS_HEADERS_GET = {
     method: 'GET',
     mode: 'cors',
