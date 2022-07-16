@@ -58,34 +58,44 @@ REACT_APP_SERVER_HOST="localhost"
 
 ### Setup the server and the client
 
-For installing the required dependencies the following command is needed. These commands have to be executed from the projects' main folder (ReactMyAdmin)
+For installing the required dependencies the following command is needed. These commands have to be executed from the projects' main folder (ReactMyAdmin by default)
 
 ```.cmd
 npm install
 ```
 
-> This command fill execute both the inner folders' package-installation.
+> This command fill execute both the client and the server app's package-installation.
 >
-> For manual installation, this command has to be run in both subfolder
+> For manual installation, this command has to be run in both subfolders.
 
 ### Run the enviroment
 
 #### Start the react app
 
-Command needed before first start
+Command for manually actualize the enviromental variables for the react app:
 
 ```.cmd
 npm run copy-env
 ```
 
-> This command will copy the .env file into the client folder. This should be done after every change of the .env file and the copied file should not be changed.
+> This command will copy the .env file into the client folder and will be automatically called when the client developer server is started.
 
 ```.cmd
-npm run start
+npm run client
 ```
+
+> Note that the server start will fail if no enviromental variables (.env) file is present in the project's main folder (where the .env.example is located).
 
 #### Run the node server
 
 ```.cmd
-npm run watch
+npm run server
 ```
+
+### Deploy the frontend-app
+
+```.cmd
+npm run client-build
+```
+
+> After a successful build, the frontend application will be served on the same port, but keep in mind that after every modification the build process must be repeated for the desired result.
