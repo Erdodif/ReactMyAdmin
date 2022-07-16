@@ -48,7 +48,7 @@ SERVER_HOST="localhost"
 
 # database credentials
 DATABASE_USER="Admin"
-DATABASE_PASSWORD="admin
+DATABASE_PASSWORD="admin"
 
 # react variables
 PORT=4000
