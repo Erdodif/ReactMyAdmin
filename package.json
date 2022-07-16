@@ -17,7 +17,9 @@
         "xampp"
     ],
     "scripts":{
-        "postinstall": "cd client && npm install && cd ../server && npm install"
+        "postinstall": "cd client && npm install && cd ../server && npm install",
+        "server":"cd ./server && npm run serve",
+        "client":"cd ./client && npm run start"
     },
     "author": "Philip G. Woods",
     "license": "ISC",
