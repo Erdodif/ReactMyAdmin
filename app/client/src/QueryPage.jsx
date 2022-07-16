@@ -51,7 +51,7 @@ export default class QueryPage extends React.Component {
     }
 
     getQueryTable() {
-        let url = this.props.url + "/" + this.props.database + "/" + this.props.table;
+        let url = this.props.url + "/api/databases/" + this.props.database + "/tables/" + this.props.table;
         fetch(url, CORS_HEADERS_GET).then(response => {
             return response.json();
         }).then(data => {
@@ -71,7 +71,7 @@ export default class QueryPage extends React.Component {
     }
 
     runQuery = () => {
-        let url = this.props.url + "/query";
+        let url = this.props.url + "/api/query";
         let database = this.props.database;
         console.log(this.props.url);
         console.log(this.props.database);

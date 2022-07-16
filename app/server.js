@@ -6,6 +6,7 @@ require('dotenv').config({path:"../.env"});
 var corsOptions = {
     origin: `http://localhost:${process.env.PORT}`
 }
+app.use(express.static(__dirname+"\\client\\build"));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +25,6 @@ function getResultByName(list, name) {
     return out;
 }
 
-
 function connectToDatabase(database) {
     return new Promise((resolve, reject) => {
         conn.query("USE " + database + ";", (err, result) => {
@@ -39,7 +39,14 @@ conn.connect(function (err) {
     console.log("Database connected");
 })
 
-app.get('/', (req, res) => {
+
+app.get('/',(req,res) =>{
+    let root = __dirname.substring(0, __dirname.lastIndexOf('\\'))+"\\client\\build\\";
+    res.sendFile("index.html",{root:root});
+});
+
+
+app.get('/api/databases', (req, res) => {
     try {
         conn.query("SHOW DATABASES", (err, result) => {
             if (err) return res.status(500).json({ error: err });
@@ -53,9 +60,25 @@ app.get('/', (req, res) => {
     }
 });
 
-app.post('/query',(req,res)=>{
+app.post('/api/query',(req,res)=>{
     try {
-        let database = req.body["database"];
+        let sql = req.body["sql"];
+        conn.query(sql, (err, result) => {
+            if (err) {
+                return res.status(400).json({ error: err });
+            }
+            return res.status(200).json({ result: result});
+        });
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).json({ error: e });
+    }
+});
+
+app.post('/api/:databases/query',(req,res)=>{
+    try {
+        let database = req.params["database"];
         let sql = req.body["sql"];
         connectToDatabase(database)
         .then(()=>{
@@ -76,7 +99,9 @@ app.post('/query',(req,res)=>{
     }
 });
 
-app.get('/:database', (req, res) => {
+app.get('/api/databases/:database', (req, res) => {res.sendStatus(200)});
+
+app.get('/api/databases/:database/tables', (req, res) => {
     try {
         let database = req.params["database"];
         connectToDatabase(database)
@@ -101,7 +126,7 @@ app.get('/:database', (req, res) => {
     }
 });
 
-app.get('/:database/:table', (req, res) => {
+app.get('/api/databases/:database/tables/:table', (req, res,next) => {
     try {
         let database = req.params["database"];
         let table = req.params["table"];

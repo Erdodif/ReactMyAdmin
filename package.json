@@ -17,10 +17,11 @@
         "xampp"
     ],
     "scripts":{
-        "postinstall": "cd client && npm install && cd ../server && npm install",
-        "server":"cd ./server && npm run serve",
-        "client":"cd ./client && npm run copy-env && npm run start",
-        "copy-env":"cd ./client && npm run copy-env"
+        "postinstall": "cd ./app && npm install && cd ./client && npm install",
+        "server":"cd ./app && npm run serve",
+        "client":"cd ./app/client && npm run copy-env && npm run start",
+        "client-build":"cd ./app/client && npm run copy-env && npm run build",
+        "copy-env":"cd ./app/client && npm run copy-env"
     },
     "author": "Philip G. Woods",
     "license": "ISC",

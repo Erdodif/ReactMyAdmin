@@ -50,15 +50,15 @@ export default class Sidebar extends React.Component {
         let app = document.querySelector("#App");
         let state = document.getElementById("hide-sidebar").checked;
         let sidebar = document.querySelector(".Sidebar");
-        if(state){
+        if (state) {
             app.classList.add("noSidebar");
             sidebar.classList.add("hidden");
         }
-        else{
+        else {
             app.classList.remove("noSidebar");
             sidebar.classList.remove("hidden");
         }
-        
+
     }
 
     render() {
@@ -95,7 +95,7 @@ class Database extends React.Component {
     render() {
         const { name } = this.props;
         const selected = this.state.selected;
-        const url = this.props.url + "/" + name;
+        const url = this.props.url + '/' + name + "/tables/";
         return (
             <div className={selected === true ? "Database selected" : "Database"} key={"Database " + name}>
                 <div onClick={() => this.switchSelected()}>
