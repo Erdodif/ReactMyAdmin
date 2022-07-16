@@ -19,7 +19,7 @@ The server is using node.js' express server manager, the web application is made
 
 ## Setup Guide
 
-For both the database connection, and the port management, creating an enviromental variable file (`.env`) is a mandatory for expected functioning.
+For both the database connection, and the port management, creating an enviromental variable file (`.env`) is mandatory for expected functioning.
 
 ### Key variables
 
@@ -39,7 +39,7 @@ For both the database connection, and the port management, creating an enviromen
 
 > The purpose of this file it to give a syntax and semantic example of how and where the enviromental variables have to be set.
 
-#### Content of an example enviroment file
+#### Content of the example enviroment file
 
 ```.env
 # nodejs server port and host
@@ -58,7 +58,7 @@ REACT_APP_SERVER_HOST="localhost"
 
 ### Setup the server and the client
 
-For installing the required dependencies the following command is needed. These commands have to be executed from the projects' main folder (ReactMyAdmin by default)
+For installing the required dependencies the following command is needed. This command has to be executed from the projects' main folder (ReactMyAdmin by default)
 
 ```.cmd
 npm install
@@ -72,19 +72,19 @@ npm install
 
 #### Start the react app
 
-Command for manually actualize the enviromental variables for the react app:
+Command for manually update the enviromental variables of the react app:
 
 ```.cmd
 npm run copy-env
 ```
 
-> This command will copy the .env file into the client folder and will be automatically called when the client developer server is started.
+> This command will copy the `.env` file into the client folder and will be automatically called when the frontend development server is started.
 
 ```.cmd
 npm run client
 ```
 
-> Note that the server start will fail if no enviromental variables (.env) file is present in the project's main folder (where the .env.example is located).
+> Note that the starting of the server will fail if no enviromental variable (`.env` file) is present in the project's main folder (where the `.env.example` is located).
 
 #### Run the node server
 
