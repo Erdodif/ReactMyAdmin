@@ -19,7 +19,8 @@
     "scripts":{
         "postinstall": "cd client && npm install && cd ../server && npm install",
         "server":"cd ./server && npm run serve",
-        "client":"cd ./client && npm run start"
+        "client":"cd ./client && npm run start",
+        "copy-env":"cd ./client && npm run copy-env"
     },
     "author": "Philip G. Woods",
     "license": "ISC",
