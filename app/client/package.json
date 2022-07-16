@@ -12,7 +12,7 @@
     "xampp"
   ],
   "scripts": {
-    "copy-env": "copyfiles --E --a ../.env client",
+    "copy-env": "copyfiles --E --a ../../.env ./app/client",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
