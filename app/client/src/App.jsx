@@ -13,7 +13,7 @@ import {
   useParams
 } from "react-router-dom";
 
-const serverUrl = "http://" + process.env.REACT_APP_SERVER_HOST + ":" + process.env.REACT_APP_SERVER_PORT+"/api";
+const serverUrl = "http://" + process.env.REACT_APP_SERVER_HOST + ":" + process.env.REACT_APP_SERVER_PORT +"/api";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class App extends React.Component {
     this.state = {
       theme: 0,
       database: "INFORMATION_SCHEMA",
-      table: "TABLE_COLUMNS"
+      table: "TABLES"
     };
     this.selectDatabase = this.selectDatabase.bind(this);
   }
