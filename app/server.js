@@ -29,11 +29,6 @@ conn.connect(function (err) {
     console.log("Database connected");
 })
 
-
-//let apiRoutes = api(app);
-
-//app.use('/api',apiRoutes);
-
 app.get('/',(req,res) =>{
     let root = __dirname.substring(0, __dirname.lastIndexOf('\\'))+"\\client\\build\\";
     res.sendFile("index.html",{root:root});
