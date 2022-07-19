@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "hu.petrik.reactmyadmin.backend",
   "version": "0.0.1",
   "description": "A react application's backend targeting the main features of phpMyAdmin",
